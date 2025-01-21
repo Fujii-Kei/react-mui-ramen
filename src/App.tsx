@@ -5,11 +5,12 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-
+import Bought from './components/bought';
 
 function App() {
   const [count, setCount] = useState(0)
   const [alertMessage, setAlertMessage] = useState('')
+  const [purchasedItems, setPurchasedItems] = useState<string[]>([]); // Example items
 
   const handlePurchase = (amount: number, itemName: string) => {
     if (count < amount) {
@@ -17,6 +18,7 @@ function App() {
     } else {
       setCount((prevCount) => prevCount - amount)
       setAlertMessage('') // Clear alert message on successful purchase
+      setPurchasedItems((prevItems) => [...prevItems, itemName])
     }
   }
 
@@ -85,6 +87,7 @@ function App() {
           </Grid>
         </Grid>
       </Paper>
+      <Bought purchasedItems={purchasedItems} />
     </Container>
   )
 }
